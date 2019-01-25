@@ -1,5 +1,5 @@
-@extends('admin.layout') 
 @section('content')
+    dsfds
 <div class="data-list" data-url="">
     <form class="layui-form inline-form">
         <div class="pull-left">

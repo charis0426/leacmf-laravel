@@ -14,22 +14,19 @@ class PermissionController extends Controller
     //权限列表
     public function index(Request $request)
     {
-        if ($request->isMethod('post')) {
+
             $record = Permission::all()->toArray();
             $record = Tree::unlimitForLevel($record);
             return view('admin.rbac.permission.index_list', [
                 'record' => $record
             ]);
-        } else {
-            return view('admin.rbac.permission.index');
-        }
     }
 
     //添加权限
     public function add(Request $request)
     {
         if ($request->isMethod('post')) {
-            $post      = $request->post();
+            $post      = $request->post();;
             $validator = Validator::make($post, [
                 'title' => 'required|max:64',
                 'name'  => 'required|max:64'

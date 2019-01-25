@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
+    //首页模版
+    public function shouye(){
+        return view('admin.layout');
+    }
+
+
+
     //首页控制台
     public function index()
     {

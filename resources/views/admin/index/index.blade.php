@@ -1,4 +1,6 @@
-@extends('admin.layout') @section('content')
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
+<body>
 <fieldset class="layui-elem-field">
     <legend>系统信息</legend>
     <div class="layui-field-box">
@@ -71,4 +73,5 @@
         </form>
     </div>
 </fieldset>
-@endsection
+</body>
+</html>

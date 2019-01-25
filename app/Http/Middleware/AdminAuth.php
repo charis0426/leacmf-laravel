@@ -32,7 +32,6 @@ class AdminAuth
     public function handle($request, Closure $next, $guard)
     {
         $this->auth->shouldUse($guard);
-
         //无需验证的，直接过
         if ($request->is(...$this->except)) {
             return $next($request);
@@ -43,16 +42,18 @@ class AdminAuth
             if ($request->isMethod('ajax')) {
                 return Y::error('登录已过期，请重新登录');
             } else {
-                return redirect(route('login'));
+                echo "<script>window.parent.location.href='/admin/login';</script>";
+                die;
             }
         }
-
         //检查权限
         if (!($this->auth->user()->hasRole('super admin') || $this->auth->user()->can(Route::currentRouteName()))) {
             if ($request->isMethod('ajax')) {
                 return Y::error('登录已过期，请重新登录');
             } else {
-                return redirect(route('login'));
+                //return redirect(route('login'));
+                echo "<script>window.parent.location.href='/admin/login';</script>";
+                die;
             }
         }
 

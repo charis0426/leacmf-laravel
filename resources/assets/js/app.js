@@ -6,3 +6,8 @@
  */
 
 require('./bootstrap');
+
+Vue.component('Hello',require('./componets/Hello'));
+const app = new Vue({
+    el:'#app'
+})

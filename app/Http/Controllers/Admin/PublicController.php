@@ -37,12 +37,12 @@ class PublicController extends Controller
             }
             unset($post['captcha']);
             if (Auth::guard('admin')->attempt($post, boolval($request->post('remember', '')))) {
-                return Y::success('登录成功', [], route('/'));
+                return Y::success('登录成功', [], route('shouye'));
             }
             return Y::error('用户验证失败');
         } else {
             if (Auth::guard('admin')->check()) {
-                return redirect()->route('/');
+                return redirect()->route('shouye');
             }
             return view('admin.public.login');
         }

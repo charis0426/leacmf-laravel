@@ -1,4 +1,18 @@
-@extends('admin.layout') @section('content')
+<html><head>
+    <meta charset="utf-8">
+    <title>layuiAdmin std</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/static/layuiadmin/layui/css/layui.css" media="all">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="/static/layuiadmin/style/admin.css" media="all">
+</head>
+<body layadmin-themealias="default">
+<div class="layui-fluid" id="app">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="site-text site-block">
 <div class="">
     <style type="text/css">
     .rules select {
@@ -15,7 +29,11 @@
     <hr>
     <a href="{{ route('roles') }}" class="layui-btn layui-btn-primary layui-btn-small"><i class="fa fa-history"></i> 返回</a>
 </div>
-@endsection @section('script')
+<script src="/static/layuiadmin/layui/layui.js"></script>
+<script src="/static/layuiadmin/vue.min.js"></script>
+<script src="/static/layuiadmin/vue-resource.js"></script>
+<script src="/static/layuiadmin/jquery.min.js"></script>
+<script src="/static/layuiadmin/common.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     var url = "{{ url()->current() }}";
@@ -56,4 +74,9 @@ $(document).ready(function() {
     });
 });
 </script>
-@endsection
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

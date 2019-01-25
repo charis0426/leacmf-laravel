@@ -1,4 +1,4 @@
-@extends('admin.layout') 
+
 @section('content')
 <div class="data-list" data-url="">
     <form class="layui-form inline-form">

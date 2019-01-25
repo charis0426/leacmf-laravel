@@ -19,15 +19,13 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->isMethod('post')) {
-            $record = Admin::all()->toArray();
-            return view('admin.rbac.admin.index_list', [
-                'record' => $record
-            ]);
-        } else {
-            return view('admin.rbac.admin.index');
-        }
+        $record = Admin::all()->toArray();
+        return view('admin.rbac.admin.index_list', [
+            'record' => $record
+        ]);
+
     }
+
 
     //添加权限
     public function add(Request $request)

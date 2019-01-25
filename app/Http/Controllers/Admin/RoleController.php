@@ -15,14 +15,10 @@ class RoleController extends Controller
     //权限列表
     public function index(Request $request)
     {
-        if ($request->isMethod('post')) {
             $record = Role::all()->toArray();
             return view('admin.rbac.role.index_list', [
                 'record' => $record
             ]);
-        } else {
-            return view('admin.rbac.role.index');
-        }
     }
 
     //添加权限
