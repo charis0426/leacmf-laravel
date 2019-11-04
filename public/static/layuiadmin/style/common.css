@@ -1,0 +1,386 @@
+/*   v1.0 根据UI创建的公共css文件   */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    display: none;
+    height: calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: -webkit-calc(100% - 40px);
+    overflow-y: auto;
+}
+
+.grid-demo-bg1 {
+    border-collapse: collapse;
+    border-spacing: 0;
+    min-height: 20px;
+    line-height: 20px;
+    font-size: 16px;
+    color: #505050;
+    padding: 20px;
+    background-color: #eeeeee;
+    border-top: 1px solid #dcdcdc;
+    border-left: 1px solid #dcdcdc;
+}
+
+#demop {
+    overflow-y: auto;
+    width: 98%;
+    border-bottom: 1px solid #dcdcdc;
+    border-left: 1px solid #dcdcdc;
+    height: calc(100% - 61px);
+    height: -moz-calc(100% - 61px);
+    height: -webkit-calc(100% - 61px);
+    background-color: #eeeeee;
+}
+
+.m-lr20 .layui-col-md10 {
+    height: calc(100% - 71px);
+    height: -moz-calc(100% - 71px);
+    height: -webkit-calc(100% - 71px);
+    overflow-y: auto;
+}
+
+.c-left {
+    background-color: #eeeeee;
+    height: calc(100% - 71px);
+    height: -moz-calc(100% - 71px);
+    height: -webkit-calc(100% - 71px);
+}
+
+.layui-input-search {
+    height: 30px;
+}
+
+.layui-form-serch {
+    height: 30px;
+    line-height: 30px;
+    margin: 20px 0px 20px 20px;
+}
+
+.info-detail {
+    position: fixed;
+    _position: absolute;
+    width: calc(100% - 40px);
+    width: -moz-calc(100% - 40px);
+    width: -webkit-calc(100% - 40px);
+    height: calc(100% - 40px);
+    height: -moz-calc(100% - 40px);
+    height: -webkit-calc(100% - 40px);
+    left: 0;
+    top: 0;
+    z-index: 97;
+    background: #fff;
+    margin: 20px;
+    /*overflow: auto;*/
+}
+
+.info-detail .top {
+    padding: 0px 20px;
+    background: #fff;
+    height: 50px;
+    line-height: 50px;
+    color: #505050;
+    font-size: 16px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.info-detail .layui-row .top-right {
+    text-align: right;
+}
+
+.info-detail .layui-row .top-right a {
+    color: #1e9fff;
+    cursor: pointer;
+}
+
+.info-detail .main {
+    background: #FFF;
+    padding: 20px;
+}
+
+.info-detail .main > div > ul {
+    margin-left: 26px;
+}
+
+video {
+    width: 100%;
+    background: #313131;
+}
+
+.device-box {
+    position: fixed;
+    _position: absolute;
+    width: 20%;
+    left: 34%;
+    top: 0;
+    z-index: 97;
+    margin-top: 55px;
+    overflow: auto;
+}
+
+.device-list {
+    position: relative;
+    height: 38px;
+    line-height: 38px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #C9C9C9;
+}
+
+.bg-color {
+    background: #2b54ff;
+    color: #FFFFFF;
+}
+
+.device-video {
+    position: absolute;
+    width: 480px;
+    height: 360px;
+    left: 55%;
+    top: 0;
+    z-index: 97;
+    margin-top: 55px;
+    overflow: auto;
+}
+
+.m-lr20 {
+    margin: 0px 20px 0px 20px;
+}
+
+.p-l20 {
+    padding-left: 20px
+}
+
+#demoa {
+    border: 1px solid #dcdcdc;
+    border-top: none;
+    padding-left: 20px;
+}
+
+.info-detail .main .layui-col-md8 {
+    padding-left: 30px;
+}
+
+.info-detail .main .ros {
+    background: #eee;
+    height: 100%;
+    padding: 20px;
+    line-height: 30px;
+}
+
+.dv_top {
+    color: #505050
+}
+
+.dv_detail {
+    color: #787878
+}
+
+/**
+ 原layui.css 和 admin.css 中需要修改的样式
+ by xnKang
+*/
+/*admin.css*/
+html {
+    height: 100%
+}
+
+body {
+    background: #ededed;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.layui-layout-admin .layui-body {
+    background: #eeeeee
+}
+
+/*layui.css*/
+.layui-table {
+    color: #787878
+}
+
+.layui-fluid {
+    margin: 20px;
+    padding: 0px;
+    background: #fff;
+}
+
+.layui-form-label {
+    text-align: left;
+    padding: 5px 0px;
+}
+
+.layui-table {
+    margin: 0px;
+}
+
+.layui-table thead tr {
+    background: #eeeeee;
+    border: 1px solid #dcdcdc;
+    color: #787878
+}
+
+.layui-table tbody tr:hover {
+    background: #e8f5ff
+}
+
+.layui-table td, .layui-table th, .layui-table-fixed-r, .layui-table-header, .layui-table-page, .layui-table-tips-main, .layui-table-tool, .layui-table-view, .layui-table[lay-skin=line], .layui-table[lay-skin=row] {
+    border-color: #dcdcdc;
+    color: #787878
+}
+
+.layui-tree li a {
+    color: #787878
+}
+
+.layui-form-label {
+    width: 100px;
+}
+
+.info-detail .layui-form-label {
+    width: 140px;
+    text-align: right;
+    line-height: 30px;
+    color: #797979;
+    font-size: 14px;
+}
+
+.layui-form-label-search {
+    width: 60px !important;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.layui-input {
+    color: #959595
+}
+
+.info-detail .layui-input-block {
+    margin-left: 160px;
+}
+
+.merge-box .scrollbox .merge-list {
+    padding-bottom: 5px;
+}
+
+.video-style {
+    height: 400px;
+    overflow: auto;
+    background-color: #ededed;
+}
+
+.video-list {
+    margin-left: 45% !important;
+}
+
+.video-img {
+    height: 100px;
+    width: 150px;
+    background: #fff9ec;
+    margin-left: -50%;
+}
+
+.video-date {
+    color: dodgerblue;
+    margin-top: 5px;
+    margin-left: -50%;
+    font-size: 13px;
+}
+
+.head-row {
+    margin: 10px 0px;
+    border-bottom: #C9C9C9 solid 1px;
+}
+
+.event-map {
+    width: 100%;
+    height: 510px;
+    border: 1px solid #e6e6e6;
+    margin-left: 10px;
+}
+
+.list-model {
+    float: right;
+    margin-top: -15px;
+    background: dodgerblue;
+}
+
+.time-event {
+    width: 100%;
+    height: 210px;
+    margin-top: 10px;
+    border: 1px solid #e6e6e6;
+    background: white;
+}
+
+.data-list {
+    width: 100%;
+    height: 220px;
+    border: 1px solid #e6e6e6;
+}
+
+.event-info-title {
+    position: relative;
+    padding: 5px 15px;
+    min-height: 20px;
+    line-height: 20px;
+    text-align: center;
+    background: #e6e6e6;
+}
+
+.event-list {
+    width: 100%;
+    height: 210px;
+    border: 1px solid #e6e6e6;
+    margin-left: 10px;
+    margin-top: 10px;
+    background: white;
+}
+
+/*视频、作业、告警*/
+.layui-form-select .layui-input {
+    height: 30px !important;
+}
+
+/*组织机构*/
+.layui-tree li {
+    overflow: unset;
+}
+
+.c-left .layui-tree li a cite {
+    font-size: 14px;
+    font-style: normal;
+    padding: 0px 6px;
+    /*width: 106px;*/
+    display: inline-flex;
+    /*overflow: hidden;*/
+}
+
+.layui-tree li a i {
+    display: none;
+}
+/*组织机构*/
+
+.layui-laypage select {
+    min-height: 28px;
+    height: 28px;
+    padding: 0px 5px;
+}
+.load_gif{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.load_gif>img{
+    width: 400px;
+    height: 400px;
+    position: absolute; left:50%; top: 50%; margin-left: -200px;margin-top: -200px;
+}

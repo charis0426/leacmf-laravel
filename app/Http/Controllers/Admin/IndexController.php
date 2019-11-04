@@ -1,8 +1,8 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: lea
- * Date: 2018/1/18
+ * User: hewei
+ * Date: 2019/3/1
  * Time: 14:04
  */
 
@@ -10,16 +10,27 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Library\Y;
+use App\Model\AnalysisModelContent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+use App\Model\AnalysisConfig;
+use App\Model\Hkserver;
 class IndexController extends Controller
 {
     //首页模版
     public function shouye(){
-        return view('admin.layout');
+         #判断缓存是否过期
+         if(!session('sys_config')){
+             $res = $this->getSysConfigInfo();
+         }else{
+             $res = session('sys_config');
+         }
+        return view('admin.layout',['config'=>$res]);
     }
 
 
@@ -27,14 +38,7 @@ class IndexController extends Controller
     //首页控制台
     public function index()
     {
-        $sys_info = cache('sys_cache_server_info');
-        if (!$sys_info) {
-            $sys_info = $this->getServerInfo();
-            cache(['sys_cache_server_info' => $sys_info], 10 * 60);
-        }
-        return view('admin.index.index', [
-            'sys_info' => $sys_info
-        ]);
+        return view('admin.index.index');
     }
 
     public function flexible(Request $request)
@@ -82,4 +86,80 @@ class IndexController extends Controller
         Cache::flush();
         return Y::success('缓存已清除');
     }
+    /*
+     * 查询当前设备的组织结构返回服务中心的appkey
+     * @return \Illuminate\Http\Response
+     */
+    public function getHkServerConfig(Request $request)
+    {
+        #判断请求方式
+        if ($request->isMethod('post')) {
+            $post = $request->post();
+            Log::debug($post);
+            $validator = Validator::make($post, [
+                'cameraid' => 'required|string'
+            ], [], [
+                'cameraid' => '设备编号',
+            ]);
+            if ($validator->fails()) {
+                return Y::error($validator->errors());
+            }
+            #获取海康部分配置
+            if(!session('sys_hk_video')){
+                $config = $this->getHkVideoConfigInfo();
+            }else{
+                $config = session('sys_hk_video');
+            }
+            #获取改设备号的组织结构
+            try {
+                $map = AnalysisConfig::where('analysis_configs.cameraid', '=', $post['cameraid'])
+                    ->leftJoin('hk_server_para', 'hk_server_para.id',
+                        '=', 'analysis_configs.hkwebpara_id')->select('hk_server_para.*', 'analysis_configs.cameraid')
+                    ->get()->toarray();
+            } catch (\Exception $e) {
+                Log::error($e);
+                Log::info($post['cameraid']."设备查询所属服务中心配置失败");
+                return Y::error("查询失败");
+            }
+            if(count($map) <= 0){
+                Log::info($post['cameraid']."设备查询所属服务中心配置为空");
+                return Y::error("查询失败");
+            }
+            #组装cameraid
+            $map[0]['cameraid'] = $post['cameraid'];
+            #追加部分参数
+            $res = array_merge($map[0],$config);
+            return Y::success("查询成功",$res);
+        }
+    }
+    /*.
+     * 通过设备编号查询到设备内码
+     * @return \Illuminate\Http\Response
+     */
+    public function getDeviceEncoding(Request $request){
+        #判断请求方式
+        if ($request->isMethod('post')) {
+            $post = $request->post();
+            Log::debug($post);
+            $validator = Validator::make($post, [
+                'cameraid' => 'required|string'
+            ], [], [
+                'cameraid' => '设备编号',
+            ]);
+            if ($validator->fails()) {
+                return Y::error($validator->errors());
+            }
+            #调用底层控制器方法获取内码
+            $map['CameraIndexCode'] = $post['cameraid'];
+            $res  = $this->request('POST','indexCode/find',$map);
+            if(!$res || $res->ErrCode != 0 ||$res->CameraIndexCode == ""){
+                Log::info("未查询到设备".$post['cameraid']."内码");
+                $cameraId = $post['cameraid'];
+            }else{
+                $cameraId = $res->CameraIndexCode;
+            }
+            return Y::success("查询成功",['CameraIndexCode'=>$cameraId]);
+        }
+    }
+
 }

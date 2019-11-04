@@ -36,8 +36,8 @@ table .html {
                 </td>
                 <td><span class="{$vo.status?'text-red':''}"><i class="fa fa-circle"></i> {$vo.status?'正常':'禁用'}</span>
                 </td>
-                <td><a href="{:url('edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-xs layui-btn-normal  ajax-form" title="修改规则">修改</a>
-                    <a href="{:url('delete',['id'=>$vo['id']])}" title="删除" confirm="1" class="layui-btn layui-btn-xs layui-btn-danger  ajax-get">删除</a> </td>
+                <td><a href="{:url('edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-xs ajax-form" title="">修改</a>
+                    <a href="{:url('delete',['id'=>$vo['id']])}" title="" confirm="1" class="layui-btn layui-btn-xs layui-btn-danger ajax-get">删除</a> </td>
             </tr>
         </volist>
     </tbody>

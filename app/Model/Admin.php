@@ -22,7 +22,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'nickname', 'password',
+        'username', 'nickname', 'password','group_id','mobile','email','sex','card_id'
     ];
 
     /**
@@ -48,10 +48,10 @@ class Admin extends Authenticatable
 
         //当前用户含有权限的菜单
 
-        $rules = cache('sys:rule:' . $this->id);
+        $rules = cache('sys:rule:' . $this->roles[0]->id);
         if (empty($rules)) {
             if ($this->hasRole('super admin')) {
-                $rules = Permission::all()->toArray();
+                $rules = Permission::orderBy("sort","desc")->get()->toArray();
             } else {
                 $rules = [];
                 if ($this->roles) {
@@ -60,9 +60,9 @@ class Admin extends Authenticatable
                     }
                 }
             }
-            cache(['sys:rule:' . $this->id => $rules], env('APP_ENV') == 'local' ? 1 : 600);
+            cache(['sys:rule:' . $this->roles[0]->id => $rules], env('APP_ENV') == 'local' ? 1 : 600);
         }
-        $menu = cache('sys:menu:' . $this->id);
+        $menu = cache('sys:menu:' . $this->roles[0]->id);
         if (empty($menu)) {
             $menu = [];
             if ($rules) {
@@ -74,7 +74,7 @@ class Admin extends Authenticatable
             }
             //菜单
             $menu = ArrayHelp::list_to_tree($menu);
-            cache(['sys:menu:' . $this->id => $menu], env('APP_ENV') == 'local' ? 1 : 600);
+            cache(['sys:menu:' . $this->roles[0]->id => $menu], env('APP_ENV') == 'local' ? 1 : 600);
         }
         //面包屑
         $crumb = Tree::getParents($rules, $self['id']);

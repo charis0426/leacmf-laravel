@@ -93,4 +93,10 @@ class Y
         $code = $res->code >= 200 && $res->code <= 500 ? $res->code : 200;
         return response()->json($res, $code);
     }
+    //返回查询失败/异常提示get模版
+    public static function page($msg="查询异常,请稍后重试",$type=1){
+        if($type == 1) {
+            return view('admin.public.queryException', ['info' => $msg]);
+        }
+    }
 }

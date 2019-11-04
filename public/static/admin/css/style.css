@@ -55,19 +55,39 @@ html {
 .login {
   height: 100%;
   min-height: 100%;
-  background-image: url(../img/login-bg.jpg);
+  background-image: url(../img/bg_1.png);
   background-size: cover;
   background-position: 50%;
   position: relative;
 }
-
+.layui-card-body {
+    position: relative;
+    padding: 80px 50px;
+    line-height: 24px;
+}
+.login .layui-card-header  {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  margin-left: -330px;
+  color:#fff;
+  text-align:center;
+  width: 659px;
+  font-size:36px;
+  border:0px;
+}
 .login .layui-card {
   position: absolute;
-  right: 160px;
-  top: 50%;
-  -webkit-transform: translateY(-60%);
-  transform: translateY(-60%);
-  width: 360px;
+    top: 50%;
+    left: 50%;
+    margin-left: -225px;
+    margin-top: -215px;
+    width: 452px;
+    height: 431px;
+    background-image: url(../img/gif.gif);
+    background-color: transparent;
+
+    background-repeat: no-repeat;
 }
 
 .login .layui-form-label {
@@ -77,6 +97,37 @@ html {
 .login .layui-input-block {
   margin-left: 90px;
 }
+
+.phone-input{
+padding-right:20px;
+border:none;
+
+background:url("../img/user.png") no-repeat scroll left center transparent;
+}
+.pwd-input{
+padding-right:20px;
+border:none;
+background:url("../img/password.png") no-repeat scroll left center transparent;
+}
+.captcha-input{
+border:none;
+background-color: transparent;
+}
+
+.layui-form-line{
+width:100%;
+height:3px;
+background:url("../img/line.png") no-repeat scroll left center transparent;
+margin-top: 10px;
+}
+
+.layui-form-sline{
+width:100%;
+height:3px;
+background:url("../img/sline.png") no-repeat scroll left center transparent;
+margin-top: 10px;
+}
+
 
 .login p {
   text-align: center;
@@ -530,4 +581,21 @@ html {
 }
 .layui-layer .layui-container {
   padding: 5px 15px;
+}
+
+.layui-btn-fluid{
+
+}
+.layui-btn-normal{
+position: absolute;
+  left: 25%;
+width:238px;height:70px;margin:0 auto;
+background: url("../img/login.png") no-repeat;border: none;}
+.layui-btn-normal:hover{
+position: absolute;
+  left: 25%;
+width:238px;height:70px;margin:0 auto;
+background: url("../img/login_1.png") no-repeat;border: none;}
+.layui-form-checkbox i{
+
 }

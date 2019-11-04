@@ -16,6 +16,12 @@ var lea = {
         return _msg;
     }
 };
+layui.use('layer', function () {
+    this.layer = layui.layer;
+    this.layer.config({
+        offset: 't'
+    })
+})
 /**
  * 异步url请求
  * 用户简单操作，如删除
@@ -40,3 +46,7 @@ $(document).on('click', '.ajax-post', function(event) {
     }
     return false;
 })
+$("body").on("mousedown",".layui-tree a",function(){
+    $(".layui-tree a cite").css('color','#333');
+    $(this).find('cite').css('color','#1E9FFF');
+});

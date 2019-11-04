@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
-
+use Illuminate\Support\Facades\Auth;
+use App\Library\ArrayHelp;
 class PermissionController extends Controller
 {
     //权限列表
@@ -40,6 +41,28 @@ class PermissionController extends Controller
             } catch (\Exception $e) {
                 return Y::error($e->getMessage());
             }
+            if (Auth::guard('admin')->user()->hasRole('super admin')) {
+                $rules = Permission::orderBy("sort","desc")->get()->toArray();
+            } else {
+                $rules = [];
+                if (Auth::guard('admin')->user()->roles) {
+                    foreach (Auth::guard('admin')->user()->roles as $role) {
+                        $rules = array_merge($rules, $role->permissions->toArray());
+                    }
+                }
+            }
+            cache(['sys:rule:' . Auth::guard('admin')->user()->roles[0]->id => $rules], env('APP_ENV') == 'local' ? 1 : 600);
+            $menu = [];
+            if ($rules) {
+                foreach ($rules as $rule) {
+                    if ($rule['is_menu'] == 1) {
+                        array_push($menu, $rule);
+                    }
+                }
+            }
+            //菜单
+            $menu = ArrayHelp::list_to_tree($menu);
+            cache(['sys:menu:' . Auth::guard('admin')->user()->roles[0]->id => $menu], env('APP_ENV') == 'local' ? 1 : 600);
             return Y::success('添加成功');
         } else {
             //获取层次权限
@@ -70,6 +93,28 @@ class PermissionController extends Controller
                 return Y::error($e->getMessage());
             }
             if ($result) {
+                if (Auth::guard('admin')->user()->hasRole('super admin')) {
+                    $rules = Permission::orderBy("sort","desc")->get()->toArray();
+                } else {
+                    $rules = [];
+                    if (Auth::guard('admin')->user()->roles) {
+                        foreach (Auth::guard('admin')->user()->roles as $role) {
+                            $rules = array_merge($rules, $role->permissions->toArray());
+                        }
+                    }
+                }
+                cache(['sys:rule:' . Auth::guard('admin')->user()->roles[0]->id => $rules], env('APP_ENV') == 'local' ? 1 : 600);
+                $menu = [];
+                if ($rules) {
+                    foreach ($rules as $rule) {
+                        if ($rule['is_menu'] == 1) {
+                            array_push($menu, $rule);
+                        }
+                    }
+                }
+                //菜单
+                $menu = ArrayHelp::list_to_tree($menu);
+                cache(['sys:menu:' . Auth::guard('admin')->user()->roles[0]->id => $menu], env('APP_ENV') == 'local' ? 1 : 600);
                 return Y::success('更新成功');
             }
             return Y::success('更新失败');
